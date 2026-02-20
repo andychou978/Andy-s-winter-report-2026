@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周楷恩 | 2026 寒假紀錄</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="">
+    </div>
+
+    <div id="video-lightbox" onclick="closeVideoLightbox(event)">
+        <video id="lightbox-video" src="" controls autoplay></video>
+    </div>
+
+    <header>
+        <nav id="main-nav">
+            <a href="#home">首頁</a>
+            <a href="#cyber">資安實戰</a>
+            <a href="#ursina">3D 開發</a>
+            <a href="#houlong">後龍影像</a>
+            <a href="#farm">生活紀錄</a>
+            <a href="#thanks">謝謝大家</a>
+        </nav>
+    </header>
+
+    <section id="home" style="display: flex; min-height: 100vh;">
+        <div style="text-align: center;">
+            <p style="letter-spacing: 12px; color: var(--neon-red);">寒假生活 2026</p>
+            <h1 style="font-size: 6rem; font-weight: 900;">周楷恩</h1>
+            <p style="color: #fff; margin-top: 20px; font-size: 1.4rem; font-weight: 500; letter-spacing: 1px;">從資安教室、3D 世界、到後龍現場，好玩的事情好多喔！</p>
+        </div>
+    </section>
+
+    <section id="cyber" style="padding: 100px 8%; height: auto;">
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+            <div class="visual-box" style="border-color: var(--danger-red);">
+                <img src="資安.png" onclick="openLightbox(this.src)">
+            </div>
+            <div class="glass-card" style="border-color: var(--danger-red);">
+                <div class="badge" style="background: var(--danger-red); color: #fff;">SECURITY</div>
+                <h2 style="color: var(--danger-red);">資安課程實錄</h2>
+                <p>我上了好棒的資安課！學到了怎樣保護電腦、找出壞人想要偷的東西，還學會了好多駭客的小花招。現在我知道怎樣讓電腦變得更安全了，感覺自己變成了資安小衛士呢！</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ursina" style="padding: 100px 8%; height: auto;">
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+            <div class="photo-grid">
+                <div class="visual-box"><img src="ursina_1.png" onclick="openLightbox(this.src)"></div>
+                <div class="visual-box"><img src="ursina_2.png" onclick="openLightbox(this.src)"></div>
+            </div>
+            <div class="glass-card">
+                <div class="badge" style="background: #00bbff; color: #000;">CODING</div>
+                <h2 style="color: #00bbff;">Ursina 3D 建模</h2>
+                <p style="color: #ddd; font-size: 1.15rem;">我用 Python 和 Ursina 做出 3D 的世界！就像在螢幕裡面畫出了一個新宇宙，有光、有陰影、有各種東西動來動去。這是程式設計和想像力的魔法呢！</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="houlong" style="padding: 150px 8% 50px 8%; height: auto; display: block;">
+        <div class="container" style="display: block; max-width: 1100px; margin: 0 auto;">
+            <div class="glass-card" style="margin-bottom: 40px; border-color: var(--warm-orange); text-align: center;">
+                <div class="badge" style="background: var(--warm-orange); color: #000;">FIELD ACTION</div>
+                <h2 style="color: var(--warm-orange);">後龍：火力全開</h2>
+                <p>後龍的影片好酷喔！比起在電腦前面打代碼，現場看起來更刺激更好玩！</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; min-height: 500px;">
+                <div class="visual-box" style="border-color: var(--warm-orange);">
+                    <video muted loop playsinline src="後龍3.mp4" style="height: 100%; width: 100%; object-fit: cover; cursor: pointer;" onclick="openVideoLightbox(this.src)"></video>
+                </div>
+                <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 20px;">
+                    <div class="visual-box" style="border-color: var(--warm-orange);">
+                        <img src="後龍1.jpg" style="height: 100%; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="visual-box" style="border-color: var(--warm-orange);">
+                        <img src="後龍2.jpg" style="height: 100%; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="farm" style="padding: 100px 8%; height: auto; display: block;">
+        <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; align-items: center;">
+            <div class="photo-grid">
+                <div class="visual-box" style="border-color: var(--warm-orange);">
+                    <img src="農場.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)">
+                </div>
+                <div class="visual-box" style="border-color: var(--warm-orange);">
+                    <img src="雞蛋.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)">
+                </div>
+            </div>
+            <div class="glass-card" style="border-color: var(--warm-orange);">
+                <div class="badge" style="background: var(--warm-orange); color: #000;">LIFE EXPERIENCE</div>
+                <h2 style="color: var(--warm-orange);">農場生活紀錄</h2>
+                <p>我在農場自己撿雞蛋，還煮了火鍋！能親手摸到大自然的東西，感覺超棒的啦！</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="thanks" style="padding: 150px 0;">
+        <div style="text-align: center;">
+            <div class="thanks-container">
+                <span class="waving-hand">👋</span>
+                <h2 class="thanks-text">謝謝大家</h2>
+                <span class="waving-hand">👋</span>
+            </div>
+            <div style="margin-top: 40px;">
+                <img src="卡波.png" style="max-width: 300px; height: auto; border-radius: 15px;">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>CHOU KAI EN © 2026 | END_OF_SESSION</p>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openVideoLightbox(src) {
+            const lb = document.getElementById('video-lightbox');
+            const lbVideo = document.getElementById('lightbox-video');
+            lbVideo.src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            lbVideo.play();
+        }
+
+        function closeVideoLightbox(event) {
+            if (event.target.id === 'video-lightbox') {
+                document.getElementById('video-lightbox').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, mode = "tech";
+        const binChars = "0101011111";
+        const fontSize = 18;
+        let columns, drops = [];
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * -h;
+                this.vy = Math.random() * 2 + 1;
+                this.size = Math.random() * 3 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() { this.y += this.vy; if (this.y > h) this.reset(); }
+            draw() {
+                ctx.fillStyle = `rgba(255, 153, 51, ${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        let particles = [];
+        for(let i=0; i<100; i++) particles.push(new Particle());
+
+        function init() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            columns = Math.floor(w / fontSize);
+            drops = Array(columns).fill(1);
+        }
+        window.onresize = init;
+        init();
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+            ctx.fillRect(0, 0, w, h);
+            if (mode === "tech") {
+                ctx.font = "bold " + fontSize + "px monospace";
+                for (let i = 0; i < drops.length; i++) {
+                    const text = binChars.charAt(Math.floor(Math.random() * binChars.length));
+                    ctx.fillStyle = Math.random() > 0.9 ? "#fff" : "#00ffcc";
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            } else {
+                particles.forEach(p => { p.update(); p.draw(); });
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        window.onscroll = () => {
+            let current = "";
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                if (window.pageYOffset >= sec.offsetTop - 350) current = sec.getAttribute('id');
+            });
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) a.classList.add('active');
+            });
+            mode = (["houlong", "farm", "thanks"].includes(current)) ? "life" : "tech";
+            document.documentElement.style.setProperty('--accent', mode === "life" ? '#ff9933' : '#00ffcc');
+        };
+    </script>
+</body>
+</html>

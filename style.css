@@ -1,0 +1,255 @@
+:root {
+    --neon-green: #00ffcc;
+    --warm-orange: #ff9933;
+    --danger-red: #ff4444;
+    --bg-dark: #050505;
+    --accent: var(--neon-green);
+}
+
+/* --- 基礎設定 --- */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    background: transparent; 
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+body { 
+    background: var(--bg-dark); 
+    color: #ffffff; 
+    font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif; 
+    overflow-x: hidden; 
+}
+
+/* --- 背景畫布 --- */
+#bg-canvas { 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -2; 
+    pointer-events: none; 
+}
+
+/* --- 導覽列 --- */
+header { 
+    position: fixed; 
+    top: 0; width: 100%; 
+    padding: 20px 0; 
+    background: rgba(0,0,0,0.9); 
+    backdrop-filter: blur(15px); 
+    z-index: 1000; 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav { 
+    display: flex; 
+    justify-content: center; 
+    gap: 25px; 
+}
+
+nav a { 
+    color: #888; 
+    text-decoration: none; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+    transition: 0.4s; 
+}
+
+nav a.active { 
+    color: var(--accent); 
+    text-shadow: 0 0 10px var(--accent); 
+}
+
+/* --- 區塊佈局 --- */
+section { 
+    min-height: 100vh; 
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 100px 8%; 
+}
+
+.container { 
+    max-width: 1200px; 
+    width: 100%; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 50px; 
+    align-items: center; 
+}
+
+/* --- 視覺元件 (圖片/影片框) --- */
+.visual-box {
+    border-radius: 20px; 
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
+    border: 2px solid var(--accent);
+    background: #111; 
+    transition: transform 0.4s, border-color 0.4s;
+}
+
+.visual-box img, .visual-box video { 
+    width: 100%; 
+    display: block; 
+    cursor: zoom-in; /* 提示可以點擊放大 */
+}
+
+.visual-box:hover { 
+    transform: translateY(-8px); 
+    border-color: #fff; 
+}
+
+/* 照片網格 (Ursina & 農場區塊) */
+.photo-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+}
+
+.photo-grid .visual-box img { 
+    height: 250px; 
+    object-fit: cover; 
+}
+
+/* --- 玻璃卡片 --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(20px);
+    padding: 40px; 
+    border-radius: 30px; 
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+h2 { 
+    font-size: 2.8rem; 
+    margin-bottom: 20px; 
+    color: var(--accent); 
+}
+
+p { 
+    font-size: 1.1rem; 
+    color: #ccc; 
+    line-height: 1.8; 
+    margin-bottom: 15px; 
+}
+
+.badge { 
+    display: inline-block; 
+    background: var(--accent); 
+    color: #000; 
+    padding: 4px 12px; 
+    border-radius: 5px; 
+    font-weight: 900; 
+    font-size: 0.8rem; 
+    margin-bottom: 10px; 
+}
+
+/* --- 點擊放大燈箱 (Lightbox) --- */
+#lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none; /* 預設隱藏 */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    cursor: zoom-out;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    border: 3px solid var(--accent);
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(255,255,255,0.1);
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- 視頻點擊放大燈箱 (Video Lightbox) --- */
+#video-lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none; /* 預設隱藏 */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    cursor: zoom-out;
+}
+
+#video-lightbox video {
+    max-width: 90%;
+    max-height: 85%;
+    border: 3px solid var(--accent);
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(255,255,255,0.1);
+    animation: zoomIn 0.3s ease-out;
+}
+
+/* --- 謝謝大家 + 揮手動畫 --- */
+.thanks-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.waving-hand {
+    font-size: 5rem;
+    display: inline-block;
+    animation: wave-animation 2.5s infinite;
+    transform-origin: 70% 70%;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+
+.thanks-text {
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-shadow: 0 0 25px var(--accent);
+    letter-spacing: 10px;
+}
+
+/* --- 頁尾 --- */
+footer { 
+    padding: 50px; 
+    text-align: center; 
+    color: #444; 
+    font-size: 0.8rem; 
+    letter-spacing: 4px; 
+}
+
+/* --- RWD 手機版適應 --- */
+@media (max-width: 900px) { 
+    .container { grid-template-columns: 1fr !important; } 
+    .thanks-text { font-size: 3rem; }
+    .waving-hand { font-size: 3rem; }
+    /* 手機版後龍區塊改為垂直排列 */
+    #houlong div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+    }
+    #houlong .visual-box { height: 300px !important; }
+}

@@ -13,8 +13,17 @@
             --accent: var(--neon-green);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        /* --- 基礎設定：移除會導致點擊失效的 background: transparent --- */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
         body { 
             background: var(--bg-dark); 
             color: #ffffff; 
@@ -22,47 +31,123 @@
             overflow-x: hidden; 
         }
 
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        /* --- 背景畫布 --- */
+        #bg-canvas { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            z-index: -1; 
+            pointer-events: none; 
+        }
 
+        /* --- 導覽列：確保點擊區域正確 --- */
         header { 
-            position: fixed; top: 0; width: 100%; padding: 20px 0; 
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); 
-            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: fixed; 
+            top: 0; width: 100%; 
+            padding: 20px 0; 
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(15px); 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        nav { display: flex; justify-content: center; gap: 25px; }
-        nav a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.4s; cursor: pointer; }
-        nav a:hover, nav a.active { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+        }
 
-        section { min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; padding: 100px 8%; }
-        .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        /* 重要：href 必須使用 #ID，否則會跑出檔案清單 */
+        nav a { 
+            color: #888; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            transition: 0.4s; 
+            cursor: pointer;
+            padding: 5px 10px;
+        }
 
+        nav a:hover, nav a.active { 
+            color: var(--accent); 
+            text-shadow: 0 0 10px var(--accent); 
+        }
+
+        /* --- 區塊佈局 --- */
+        section { 
+            min-height: 100vh; 
+            width: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 100px 8%; 
+        }
+
+        .container { 
+            max-width: 1200px; 
+            width: 100%; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 50px; 
+            align-items: center; 
+        }
+
+        /* --- 視覺元件 --- */
         .visual-box {
-            border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
-            border: 2px solid var(--accent); background: #111; transition: transform 0.4s, border-color 0.4s;
+            border-radius: 20px; 
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
+            border: 2px solid var(--accent);
+            background: #111; 
+            transition: transform 0.4s, border-color 0.4s;
         }
-        .visual-box img, .visual-box video { width: 100%; display: block; cursor: zoom-in; }
-        .visual-box:hover { transform: translateY(-8px); border-color: #fff; }
 
-        .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .photo-grid .visual-box img { height: 250px; object-fit: cover; }
+        .visual-box img, .visual-box video { 
+            width: 100%; 
+            display: block; 
+            cursor: zoom-in;
+        }
 
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .visual-box:hover { 
+            transform: translateY(-8px); 
+            border-color: #fff; 
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(20px);
+            padding: 40px; 
+            border-radius: 30px; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
         h2 { font-size: 2.8rem; margin-bottom: 20px; color: var(--accent); }
         p { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 15px; }
         .badge { display: inline-block; background: var(--accent); color: #000; padding: 4px 12px; border-radius: 5px; font-weight: 900; font-size: 0.8rem; margin-bottom: 10px; }
 
-        /* 謝謝大家與揮手動畫 */
-        .thanks-container { display: flex; align-items: center; justify-content: center; gap: 20px; }
-        .waving-hand { font-size: 4rem; animation: wave 2s infinite ease-in-out; transform-origin: 70% 70%; }
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-20deg); }
-            75% { transform: rotate(20deg); }
+        /* --- 燈箱與揮手動畫 --- */
+        #lightbox, #video-lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            cursor: zoom-out;
         }
 
-        #lightbox, #video-lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 2000; cursor: zoom-out; }
-        #lightbox img, #video-lightbox video { max-width: 90%; max-height: 85%; border: 3px solid var(--accent); border-radius: 15px; animation: zoomIn 0.3s ease-out; }
+        #lightbox img, #video-lightbox video {
+            max-width: 90%;
+            max-height: 85%;
+            border: 3px solid var(--accent);
+            border-radius: 15px;
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        .waving-hand { display: inline-block; font-size: 4rem; animation: wave 2s infinite ease-in-out; transform-origin: 70% 70%; }
+        @keyframes wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-20deg); } 75% { transform: rotate(20deg); } }
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         footer { text-align: center; padding: 40px; color: #555; font-size: 0.8rem; }
@@ -107,16 +192,15 @@
             <div class="glass-card" style="border-color: var(--danger-red);">
                 <div class="badge" style="background: var(--danger-red); color: #fff;">SECURITY</div>
                 <h2 style="color: var(--danger-red);">資安課程實錄</h2>
-                <p>研習網路防禦機制與駭客攻擊辨識，建構個人資安防護意識與責任感。</p>
+                <p>研習網路防禦機制與駭客攻擊辨識，建構個人資安防護意識。</p>
             </div>
         </div>
     </section>
 
     <section id="ursina">
         <div class="container">
-            <div class="photo-grid">
-                <div class="visual-box"><img src="ursina_1.png" onclick="openLightbox(this.src)"></div>
-                <div class="visual-box"><img src="ursina_2.png" onclick="openLightbox(this.src)"></div>
+            <div class="visual-box">
+                <img src="ursina_1.png" onclick="openLightbox(this.src)">
             </div>
             <div class="glass-card">
                 <div class="badge" style="background: #00bbff; color: #000;">CODING</div>
@@ -133,23 +217,16 @@
                 <h2 style="color: var(--warm-orange);">後龍：火力全開</h2>
                 <p>實地參與大型活動錄製，觀察聲光效果與影像節奏的整合應用。</p>
             </div>
-            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
-                <div class="visual-box" style="border-color: var(--warm-orange);">
-                    <video muted loop playsinline src="後龍3.mp4" style="height: 400px; width: 100%; object-fit: cover; cursor: pointer;" onclick="openVideoLightbox(this.src)"></video>
-                </div>
-                <div style="display: grid; gap: 20px;">
-                    <div class="visual-box" style="border-color: var(--warm-orange);"><img src="後龍1.jpg" style="height: 190px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
-                    <div class="visual-box" style="border-color: var(--warm-orange);"><img src="後龍2.jpg" style="height: 190px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
-                </div>
+            <div class="visual-box" style="border-color: var(--warm-orange); max-width: 800px; margin: 0 auto;">
+                <video muted loop playsinline src="後龍3.mp4" style="width: 100%; cursor: pointer;" onclick="openVideoLightbox(this.src)"></video>
             </div>
         </div>
     </section>
 
     <section id="farm">
         <div class="container">
-            <div class="photo-grid">
-                <div class="visual-box" style="border-color: var(--warm-orange);"><img src="農場.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
-                <div class="visual-box" style="border-color: var(--warm-orange);"><img src="雞蛋.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
+            <div class="visual-box" style="border-color: var(--warm-orange);">
+                <img src="農場.jpg" onclick="openLightbox(this.src)">
             </div>
             <div class="glass-card" style="border-color: var(--warm-orange);">
                 <div class="badge" style="background: var(--warm-orange); color: #000;">LIFE EXPERIENCE</div>
@@ -161,9 +238,9 @@
 
     <section id="thanks">
         <div style="text-align: center;">
-            <div class="thanks-container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
                 <span class="waving-hand">👋</span>
-                <h2 style="font-size: 4rem;">謝謝大家</h2>
+                <h2 style="font-size: 4.5rem;">謝謝大家</h2>
                 <span class="waving-hand">👋</span>
             </div>
             <div style="margin-top: 40px;">
@@ -177,6 +254,7 @@
     </footer>
 
     <script>
+        // 燈箱邏輯
         function openLightbox(src) {
             const lb = document.getElementById('lightbox');
             document.getElementById('lightbox-img').src = src;
@@ -202,14 +280,22 @@
             }
         }
 
+        // 解決跳轉與檔案清單問題：強制 JavaScript 跳轉
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
+        // 背景渲染
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let w, h, mode = "tech";

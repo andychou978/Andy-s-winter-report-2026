@@ -12,35 +12,73 @@
             --bg-dark: #050505;
             --accent: var(--neon-green);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: var(--bg-dark); color: #ffffff; font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif; overflow-x: hidden; }
+        body { 
+            background: var(--bg-dark); 
+            color: #ffffff; 
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif; 
+            overflow-x: hidden; 
+        }
+
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        header { position: fixed; top: 0; width: 100%; padding: 20px 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        header { 
+            position: fixed; top: 0; width: 100%; padding: 20px 0; 
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); 
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
         nav { display: flex; justify-content: center; gap: 25px; }
-        nav a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.4s; cursor: pointer; padding: 5px 10px; }
+        nav a { color: #888; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.4s; cursor: pointer; }
         nav a:hover, nav a.active { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
         section { min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; padding: 100px 8%; }
         .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .visual-box { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 2px solid var(--accent); background: #111; transition: transform 0.4s, border-color 0.4s; }
+
+        .visual-box {
+            border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
+            border: 2px solid var(--accent); background: #111; transition: transform 0.4s, border-color 0.4s;
+        }
         .visual-box img, .visual-box video { width: 100%; display: block; cursor: zoom-in; }
         .visual-box:hover { transform: translateY(-8px); border-color: #fff; }
+
+        .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .photo-grid .visual-box img { height: 250px; object-fit: cover; }
+
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); }
         h2 { font-size: 2.8rem; margin-bottom: 20px; color: var(--accent); }
         p { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 15px; }
         .badge { display: inline-block; background: var(--accent); color: #000; padding: 4px 12px; border-radius: 5px; font-weight: 900; font-size: 0.8rem; margin-bottom: 10px; }
+
+        /* 謝謝大家與揮手動畫 */
+        .thanks-container { display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .waving-hand { font-size: 4rem; animation: wave 2s infinite ease-in-out; transform-origin: 70% 70%; }
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-20deg); }
+            75% { transform: rotate(20deg); }
+        }
+
         #lightbox, #video-lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 2000; cursor: zoom-out; }
         #lightbox img, #video-lightbox video { max-width: 90%; max-height: 85%; border: 3px solid var(--accent); border-radius: 15px; animation: zoomIn 0.3s ease-out; }
-        .waving-hand { display: inline-block; font-size: 4rem; animation: wave 2s infinite ease-in-out; transform-origin: 70% 70%; }
-        @keyframes wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-20deg); } 75% { transform: rotate(20deg); } }
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
         footer { text-align: center; padding: 40px; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
+
     <canvas id="bg-canvas"></canvas>
-    <div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src=""></div>
-    <div id="video-lightbox" onclick="closeVideoLightbox(event)"><video id="lightbox-video" src="" controls autoplay></video></div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="">
+    </div>
+
+    <div id="video-lightbox" onclick="closeVideoLightbox(event)">
+        <video id="lightbox-video" src="" controls autoplay></video>
+    </div>
 
     <header>
         <nav id="main-nav">
@@ -69,20 +107,21 @@
             <div class="glass-card" style="border-color: var(--danger-red);">
                 <div class="badge" style="background: var(--danger-red); color: #fff;">SECURITY</div>
                 <h2 style="color: var(--danger-red);">資安課程實錄</h2>
-                <p>研習網路防禦機制與駭客攻擊辨識。</p>
+                <p>研習網路防禦機制與駭客攻擊辨識，建構個人資安防護意識與責任感。</p>
             </div>
         </div>
     </section>
 
     <section id="ursina">
         <div class="container">
-            <div class="visual-box">
-                <img src="ursina_1.png" onclick="openLightbox(this.src)">
+            <div class="photo-grid">
+                <div class="visual-box"><img src="ursina_1.png" onclick="openLightbox(this.src)"></div>
+                <div class="visual-box"><img src="ursina_2.png" onclick="openLightbox(this.src)"></div>
             </div>
             <div class="glass-card">
                 <div class="badge" style="background: #00bbff; color: #000;">CODING</div>
                 <h2 style="color: #00bbff;">Ursina 3D 建模</h2>
-                <p>運用 Python 進行 3D 場景開發。</p>
+                <p>運用 Python 結合 Ursina 引擎進行 3D 場景開發，掌握物件渲染與動態邏輯。</p>
             </div>
         </div>
     </section>
@@ -90,31 +129,41 @@
     <section id="houlong">
         <div class="container" style="display: block;">
             <div class="glass-card" style="margin-bottom: 40px; border-color: var(--warm-orange); text-align: center;">
+                <div class="badge" style="background: var(--warm-orange); color: #000;">FIELD ACTION</div>
                 <h2 style="color: var(--warm-orange);">後龍：火力全開</h2>
+                <p>實地參與大型活動錄製，觀察聲光效果與影像節奏的整合應用。</p>
             </div>
-            <div class="visual-box" style="border-color: var(--warm-orange); max-width: 800px; margin: 0 auto;">
-                <video muted loop playsinline src="後龍3.mp4" onclick="openVideoLightbox(this.src)"></video>
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
+                <div class="visual-box" style="border-color: var(--warm-orange);">
+                    <video muted loop playsinline src="後龍3.mp4" style="height: 400px; width: 100%; object-fit: cover; cursor: pointer;" onclick="openVideoLightbox(this.src)"></video>
+                </div>
+                <div style="display: grid; gap: 20px;">
+                    <div class="visual-box" style="border-color: var(--warm-orange);"><img src="後龍1.jpg" style="height: 190px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
+                    <div class="visual-box" style="border-color: var(--warm-orange);"><img src="後龍2.jpg" style="height: 190px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="farm">
         <div class="container">
-            <div class="visual-box" style="border-color: var(--warm-orange);">
-                <img src="農場.jpg" onclick="openLightbox(this.src)">
+            <div class="photo-grid">
+                <div class="visual-box" style="border-color: var(--warm-orange);"><img src="農場.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
+                <div class="visual-box" style="border-color: var(--warm-orange);"><img src="雞蛋.jpg" style="height: 300px; width: 100%; object-fit: cover;" onclick="openLightbox(this.src)"></div>
             </div>
             <div class="glass-card" style="border-color: var(--warm-orange);">
+                <div class="badge" style="background: var(--warm-orange); color: #000;">LIFE EXPERIENCE</div>
                 <h2 style="color: var(--warm-orange);">農場生活紀錄</h2>
-                <p>親身參與農業實踐。</p>
+                <p>親身參與農業實踐，體驗從環境勞作到餐食籌備的完整生活鏈。</p>
             </div>
         </div>
     </section>
 
     <section id="thanks">
         <div style="text-align: center;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <div class="thanks-container">
                 <span class="waving-hand">👋</span>
-                <h2 style="font-size: 4.5rem;">謝謝大家</h2>
+                <h2 style="font-size: 4rem;">謝謝大家</h2>
                 <span class="waving-hand">👋</span>
             </div>
             <div style="margin-top: 40px;">
@@ -123,33 +172,104 @@
         </div>
     </section>
 
-    <footer><p>CHOU KAI EN © 2026</p></footer>
+    <footer>
+        <p>CHOU KAI EN © 2026 | 2026 WINTER REPORT SYSTEM</p>
+    </footer>
 
     <script>
-        function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-        function openVideoLightbox(src) { const v = document.getElementById('lightbox-video'); v.src = src; document.getElementById('video-lightbox').style.display = 'flex'; v.play(); }
-        function closeVideoLightbox(e) { if (e.target.id === 'video-lightbox') { document.getElementById('video-lightbox').style.display = 'none'; } }
-        
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function openVideoLightbox(src) {
+            const lb = document.getElementById('video-lightbox');
+            const v = document.getElementById('lightbox-video');
+            v.src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            v.play();
+        }
+        function closeVideoLightbox(e) {
+            if (e.target.id === 'video-lightbox') {
+                document.getElementById('video-lightbox').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
             });
         });
 
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let w, h, mode = "tech";
-        function init() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-        window.onresize = init; init();
+        const fontSize = 18;
+        let columns, drops;
+
+        function init() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            columns = Math.floor(w / fontSize);
+            drops = Array(columns).fill(1);
+        }
+        window.onresize = init;
+        init();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w; this.y = Math.random() * -h;
+                this.vy = Math.random() * 1.5 + 0.5; this.size = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() { this.y += this.vy; if (this.y > h) this.reset(); }
+            draw() {
+                ctx.fillStyle = `rgba(255, 153, 51, ${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        const particles = Array.from({length: 80}, () => new Particle());
+
         function draw() {
-            ctx.fillStyle = "rgba(5, 5, 5, 0.2)";
+            ctx.fillStyle = "rgba(5, 5, 5, 0.15)";
             ctx.fillRect(0, 0, w, h);
+            if (mode === "tech") {
+                ctx.font = fontSize + "px monospace";
+                for (let i = 0; i < drops.length; i++) {
+                    const text = Math.random() > 0.5 ? "1" : "0";
+                    ctx.fillStyle = Math.random() > 0.95 ? "#fff" : "#00ffcc";
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            } else { particles.forEach(p => { p.update(); p.draw(); }); }
             requestAnimationFrame(draw);
         }
         draw();
+
+        window.onscroll = () => {
+            let current = "";
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                if (window.pageYOffset >= sec.offsetTop - 300) current = sec.getAttribute('id');
+            });
+            document.querySelectorAll('nav a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) a.classList.add('active');
+            });
+            mode = (["houlong", "farm", "thanks"].includes(current)) ? "life" : "tech";
+            document.documentElement.style.setProperty('--accent', mode === "life" ? '#ff9933' : '#00ffcc');
+        };
     </script>
 </body>
 </html>

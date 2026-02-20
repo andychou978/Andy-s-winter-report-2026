@@ -5,11 +5,14 @@
 ## 使用方式
 
 1. **下載或克隆整個資料夾**
-   ```bash
-   git clone https://github.com/andychou978/Andy-s-winter-report-2026.git
-   cd Andy-s-winter-report-2026
-   ```
-   或直接從 GitHub 下載壓縮包並解壓。
+   
+   - 如果老師不熟悉命令列，可以直接在瀏覽器中點選 GitHub 頁面的「Code」按鈕，選擇 "Download ZIP" 下載壓縮包，解壓後即可。
+   - 若會使用命令提示字元（Terminal、命令列視窗），請在電腦上打開一個命令列視窗，然後鍵入：
+     ```bash
+     git clone https://github.com/andychou978/Andy-s-winter-report-2026.git
+     cd Andy-s-winter-report-2026
+     ```
+     命令列視窗就是像黑底白字的程式，或 Windows 的 PowerShell/命令提示字元。
 
 2. **打開檔案**
    - 直接在檔案管理器中雙擊 `寒假成果報告.html`。

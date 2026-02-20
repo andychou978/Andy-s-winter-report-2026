@@ -7,6 +7,7 @@
 終端機指令 (CMD)： 按下 Win 鍵 輸入 cmd 並啟動，依序輸入以下指令以精準同步源碼：
 
 程式碼片段
+
 git clone https://github.com/andychou978/Andy-s-winter-report-2026.git
 cd Andy-s-winter-report-2026
 2. 啟動程序
